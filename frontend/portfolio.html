@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herman Edward | Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* =====================
+       GLOBAL
+    ===================== */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background: #f4f9ff;
+        color: #222;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: auto;
+    }
+
+    /* =====================
+       HEADER & NAVIGATION
+    ===================== */
+    header {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 1002;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0;
+        position: relative;
+    }
+
+    .logo {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #007bff;
+        margin: 0;
+        z-index: 1002;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+    }
+
+    nav a {
+        margin-left: 18px;
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+        color: #007bff;
+    }
+
+    /* Hide Mobile Menu Toggle Checkbox */
+    .menu-checkbox {
+        display: none;
+    }
+
+    /* Hide Hamburger Button on Desktop */
+    .hamburger {
+        display: none;
+    }
+
+    /* Back button */
+    .btn-back {
+        background: linear-gradient(135deg, #00c3ff, #007bff);
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-left: 10px;
+        box-shadow: 0 4px 12px rgba(0, 195, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(0, 195, 255, 0.45);
+    }
+
+    /* =====================
+       PORTFOLIO
+    ===================== */
+    .portfolio {
+        background: linear-gradient(135deg, #eef8ff, #ffffff);
+        padding: 90px 20px;
+        text-align: center;
+    }
+
+    .title-blue {
+        font-size: 2.2rem;
+        color: #007bff;
+    }
+
+    .subtitle {
+        color: #555;
+        max-width: 600px;
+        margin: 10px auto 60px;
+    }
+
+    /* Grid */
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 35px;
+    }
+
+    /* Card */
+    .portfolio-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border-radius: 22px;
+        padding: 40px 30px;
+        text-decoration: none;
+        color: #222;
+        box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+    .portfolio-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, #007bff, #00c3ff);
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 0.4s ease;
+    }
+
+    .portfolio-card:hover::before {
+        opacity: 1;
+    }
+
+    .portfolio-card:hover {
+        transform: translateY(-12px) scale(1.03);
+        color: #fff;
+    }
+
+    .portfolio-card:hover span {
+        color: #fff;
+    }
+
+    .portfolio-card span {
+        display: inline-block;
+        margin-top: 15px;
+        font-weight: 600;
+        color: #007bff;
+        transition: color 0.4s ease;
+    }
+
+    .icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+        background: #ffffff;
+        text-align: center;
+        padding: 22px 10px;
+        margin-top: 80px;
+        box-shadow: 0 -6px 20px rgba(0,0,0,0.05);
+    }
+
+    footer a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    /* =====================
+       ANIMATIONS
+    ===================== */
+    .hidden {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease;
+    }
+
+    .show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* =====================
+       RESPONSIVE / MOBILE NAVBAR
+    ===================== */
+    @media (max-width: 768px) {
+        /* Show and style the hamburger layout button */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+            z-index: 1003; /* Higher than nav drawer */
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #007bff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Transform desktop layout options into a full page slide drawer */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #f4f9ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            z-index: 1001;
+            
+            /* Slide navigation upward out of active view natively */
+            transform: translateY(-100%);
+            transition: transform 0.4s ease-in-out;
+        }
+
+        nav a {
+            margin-left: 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .btn-back {
+            padding: 12px 24px;
+            font-size: 18px;
+            margin-left: 0;
+        }
+
+        /* Trigger open transition drawer via CSS input check */
+        .menu-checkbox:checked ~ nav {
+            transform: translateY(0);
+        }
+
+        /* Morph layout bars smoothly into an 'X' design icon */
+        .menu-checkbox:checked ~ .hamburger span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .menu-checkbox:checked ~ .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-checkbox:checked ~ .hamburger span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+    }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-container">
+        <h1 class="logo">Herman Edward</h1>
+        
+        <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+        
+        <label for="menu-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="portfolio.html" class="active">Portfolio</a>
+            <a href="contact.html">Contact</a>
+            <a href="javascript:history.back()" class="btn-back">← Back</a>
+        </nav>
+    </div>
+</header>
+
+<section class="portfolio">
+    <div class="container">
+        <h2 class="title-blue">My Portfolio</h2>
+        <p class="subtitle">
+            Explore my work across design, development, and data.
+        </p>
+
+        <div class="portfolio-grid">
+
+            <a href="graphics.html" class="portfolio-card">
+                <div class="icon">🎨</div>
+                <h3>Graphics Design</h3>
+                <p>Logos, posters, branding, and creative visual designs.</p>
+                <span>View Projects →</span>
+            </a>
+
+            <a href="websites.html" class="portfolio-card">
+                <div class="icon">💻</div>
+                <h3>Websites & Systems</h3>
+                <p>Web apps, systems, dashboards, and UI solutions.</p>
+                <span>View Projects →</span>
+            </a>
+
+            <a href="data_science.html" class="portfolio-card">
+                <div class="icon">📊</div>
+                <h3>Data Analysis</h3>
+                <p>Data science, analytics, ML models, and research.</p>
+                <span>View Projects →</span>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 Herman Smart | 
+        <a href="mailto:harmonysmart004@gmail.com">harmonysmart004@gmail.com</a>
+    </p>
+</footer>
+
+<script>
+    // Scroll reveal animation
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".portfolio-card").forEach(card => {
+    card.classList.add("hidden");
+    observer.observe(card);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Designs | Herman Edward</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =====================
+            GLOBAL & HEADER
+        ===================== */
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1002;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            padding: 16px 0;
+        }
+
+        .header-container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #007bff;
+            margin: 0;
+            z-index: 1002;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            margin-left: 18px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #007bff;
+        }
+
+        /* Hide Mobile Menu Toggle Checkbox */
+        .menu-checkbox {
+            display: none;
+        }
+
+        /* Hide Hamburger Button on Desktop */
+        .hamburger {
+            display: none;
+        }
+
+        /* =====================
+            BACK BUTTONS
+        ===================== */
+        .btn-back {
+            display: inline-block;
+            background: linear-gradient(135deg, #00c3ff, #007bff);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 22px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 6px 18px rgba(0,195,255,0.35);
+            transition: all 0.35s ease;
+            margin-left: 10px;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(0,195,255,0.55);
+        }
+
+        .back-btn-container {
+            margin-top: 50px;
+        }
+
+        /* =====================
+            MORE DESIGNS SECTION
+        ===================== */
+        .more-designs {
+            padding: 60px 20px;
+            background-color: #eef8ff;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .more-designs h2 {
+            color: #007bff;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .more-designs p {
+            color: #555;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        .designs-grid {
+            width: 90%;
+            max-width: 1300px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .design-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 15px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .design-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 28px rgba(0,195,255,0.35);
+        }
+
+        .design-card img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .design-card h3 {
+            color: #007bff;
+            margin-bottom: 8px;
+        }
+
+        .design-card p {
+            color: #444;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .design-card a {
+            display: inline-block;
+            padding: 10px 22px;
+            background: #0d6efd;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 25px;
+            transition: 0.3s ease;
+        }
+
+        .design-card a:hover {
+            background: #084298;
+        }
+
+        /* =====================
+            FOOTER
+        ===================== */
+        footer {
+            background: #ffffff;
+            text-align: center;
+            padding: 22px 10px;
+            box-shadow: 0 -6px 20px rgba(0,0,0,0.05);
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* =====================
+            RESPONSIVE / MOBILE NAVBAR
+        ===================== */
+        @media (max-width: 768px) {
+            /* Show and style the hamburger layout button */
+            .hamburger {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 30px;
+                height: 20px;
+                cursor: pointer;
+                z-index: 1003; /* Higher than nav drawer */
+            }
+
+            .hamburger span {
+                display: block;
+                height: 3px;
+                width: 100%;
+                background-color: #007bff;
+                border-radius: 3px;
+                transition: all 0.3s ease;
+            }
+
+            /* Transform normal navigation into full screen drawer */
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: #eef8ff;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 25px;
+                z-index: 1001;
+                
+                /* Slide upward out of visual boundaries natively */
+                transform: translateY(-100%);
+                transition: transform 0.4s ease-in-out;
+            }
+
+            nav a {
+                margin-left: 0;
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            .btn-back {
+                padding: 12px 24px;
+                font-size: 18px;
+                margin-left: 0;
+            }
+
+            /* Trigger screen drawer navigation slide using hidden checkbox */
+            .menu-checkbox:checked ~ nav {
+                transform: translateY(0);
+            }
+
+            /* CSS transformation for hamburger into 'X' design close icon */
+            .menu-checkbox:checked ~ .hamburger span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .menu-checkbox:checked ~ .hamburger span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-checkbox:checked ~ .hamburger span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-container">
+        <h1 class="logo">Herman Edward</h1>
+        
+        <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+        
+        <label for="menu-toggle" class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="portfolio.html" class="active">Portfolio</a>
+            <a href="contact.html">Contact</a>
+            <a href="javascript:history.back()" class="btn-back">← Back</a>
+        </nav>
+    </div>
+</header>
+
+<section class="more-designs">
+    <h2>More Designs</h2>
+    <p>Explore more websites, systems, and creative designs</p>
+
+    <div class="designs-grid">
+
+        <div class="design-card">
+            <img src="zainab.png" alt="Design 1">
+            <h3>Website Design</h3>
+            <p>Modern responsive website layout.</p>
+            <a href="#" target="_blank">View</a>
+        </div>
+
+        <div class="design-card">
+            <img src="kwaya.png" alt="Design 2">
+            <h3>System Dashboard</h3>
+            <p>Clean admin dashboard interface.</p>
+            <a href="#" target="_blank">View</a>
+        </div>
+
+        <div class="design-card">
+            <img src="dommy.png" alt="Design 3">
+            <h3>Landing Page</h3>
+            <p>High-conversion landing page design.</p>
+            <a href="#" target="_blank">View</a>
+        </div>
+
+    </div>
+
+    <div class="back-btn-container">
+        <a href="portfolio.html" class="btn-back">← Back to Portfolio</a>
+    </div>
+</section>
+
+<footer>
+    <p>
+        Contact me at:
+        <a href="mailto:harmonysmart004@gmail.com">harmonysmart004@gmail.com</a>
+    </p>
+</footer>
+
+</body>
+</html>
