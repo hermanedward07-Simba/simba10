@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Herman Edward | Contact</title>
 
-<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -240,6 +239,11 @@ nav a.active {
     cursor: pointer;
 }
 
+.contact-form button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
 /* =====================
     FOOTER
 ===================== */
@@ -386,10 +390,8 @@ footer {
     <div class="header-container">
         <h1 class="logo">Herman Edward</h1>
         
-        <!-- Mobile Hidden Checkbox Toggle Control -->
         <input type="checkbox" id="menu-toggle" class="menu-checkbox">
         
-        <!-- Animated Hamburger Bars Label -->
         <label for="menu-toggle" class="hamburger">
             <span></span>
             <span></span>
@@ -470,7 +472,7 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
 
 
-// --- Backend Connection Code ---
+// --- Backend Connection Code (UPDATED) ---
 document.getElementById('contactForm').addEventListener('submit', async (e) => {
     e.preventDefault(); 
 
@@ -485,8 +487,16 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
         message: document.getElementById('message').value
     };
 
+    // Your production Render link
+    const BACKEND_URL = 'https://simba10.onrender.com'; 
+    
+    // Auto-detect environment: Use localhost for offline tests, Render for production
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:5000'
+        : BACKEND_URL;
+
     try {
-        const response = await fetch('http://localhost:5000/api/contact', {
+        const response = await fetch(`${API_URL}/api/contact`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -496,15 +506,15 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
 
         const result = await response.json();
 
-        if (result.success) {
+        if (response.ok && result.success) {
             alert('Success! Your message has been sent directly to Herman.');
             e.target.reset(); 
         } else {
-            alert('Oops! ' + result.message);
+            alert('Oops! ' + (result.message || 'Something went wrong.'));
         }
     } catch (error) {
         console.error('Network Error:', error);
-        alert('Could not connect to the server. Is your backend running?');
+        alert('Could not connect to the server. Note: If this is the first message sent in a while, Render takes up to 50 seconds to wake up its free servers. Please wait a moment and try clicking Send again!');
     } finally {
         submitBtn.innerText = originalBtnText;
         submitBtn.disabled = false;
